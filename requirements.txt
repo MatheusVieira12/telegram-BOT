@@ -5,3 +5,4 @@ sqlalchemy
 pandas
 openpyxl
 python-dotenv
+psycopg[binary]
