@@ -145,7 +145,14 @@ async def startup():
     await telegram_app.initialize()
 
     if WEBHOOK_URL:
-        await telegram_app.bot.set_webhook(url=f"{WEBHOOK_URL}/webhook")
+        webhook_url = WEBHOOK_URL.strip().rstrip("/") + "/webhook"
+        print(f"Configurando webhook em: {webhook_url}", flush=True)
+
+        try:
+            await telegram_app.bot.set_webhook(url=webhook_url)
+            print("Webhook configurado com sucesso!", flush=True)
+        except Exception as e:
+            print(f"Erro ao configurar webhook: {e}", flush=True)
 
     await telegram_app.start()
 
